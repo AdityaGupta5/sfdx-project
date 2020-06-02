@@ -1,0 +1,46 @@
+<aura:component description="AddBoatReview" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="boat" type="Boat__c" access="public"/>
+    <aura:attribute name="boatReview" type="BoatReview__c"/>
+    <aura:attribute name="recordError" type="String" access="private"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:registerEvent name="BoatReviewAdded" type="c:BoatReviewAdded"/>
+    
+    <force:recordData aura:id="service"
+                      layoutType="FULL"
+                      fields="Id, Name, Comment__c, Boat__c, Rating__c"
+                      targetError="{!v.recordError}"
+                      targetFields="{!v.boatReview}"
+                      recordUpdated="{!c.onRecordUpdated}"/>
+    
+    <lightning:layout multipleRows="true">
+        
+        <lightning:layoutItem size="12" padding="around-small">
+            <lightning:input name="title" label="Title" type="text" value="{!v.boatReview.Name}" />
+        </lightning:layoutItem>
+        
+        <lightning:layoutItem size="12" padding="around-small">
+            <label class="slds-text-title">Description</label>
+            <lightning:inputRichText disabledCategories="FORMAT_FONT" value="{!v.boatReview.Comment__c}" />
+        </lightning:layoutItem>
+        
+        <lightning:layoutItem size="12" padding="around-small">
+            <label class="slds-text-title">Rating</label>
+            <c:FiveStarRating value="{!v.boatReview.Rating__c}" readonly="false"/>
+        </lightning:layoutItem>
+        
+        <lightning:layoutItem size="12" padding="around-small">
+            <lightning:button type="submit" iconName="utility:save" label="Submit" onclick="{!c.onSave}" />
+        </lightning:layoutItem>
+        
+    </lightning:layout>
+    
+    <!-- Display Lightning Data Service errors, if any -->
+    <aura:if isTrue="{!not(empty(v.recordError))}">
+        <div class="recordError">
+            <ui:message title="Error" severity="error" closable="true">
+                {!v.recordError}
+            </ui:message>
+        </div>
+    </aura:if>
+        
+</aura:component>

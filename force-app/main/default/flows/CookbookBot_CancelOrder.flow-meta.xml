@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignments>
+        <name>Failure_Message</name>
+        <label>Failure Message</label>
+        <locationX>71</locationX>
+        <locationY>434</locationY>
+        <assignmentItems>
+            <assignToReference>Message</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>Order does not exist</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Order_Cancellation_Response</name>
+        <label>Order Cancellation Response</label>
+        <locationX>287</locationX>
+        <locationY>436</locationY>
+        <assignmentItems>
+            <assignToReference>Message</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>Your Order has been cancelled</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Check_Order_Status</name>
+        <label>Check Order Status</label>
+        <locationX>60</locationX>
+        <locationY>277</locationY>
+        <defaultConnector>
+            <targetReference>Failure_Message</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Order_Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Order_Numer</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>Get.Order_Number__c</elementReference>
+                </rightValue>
+            </conditions>
+            <label>Order Found</label>
+        </rules>
+    </decisions>
+    <interviewLabel>CookbookBot CancelOrder {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>CookbookBot CancelOrder</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get</name>
+        <label>Order LookUp</label>
+        <locationX>68</locationX>
+        <locationY>99</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Order_Status</targetReference>
+        </connector>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Order</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Cancel_Order</name>
+        <label>Cancel Order</label>
+        <locationX>286</locationX>
+        <locationY>269</locationY>
+        <connector>
+            <targetReference>Order_Cancellation_Response</targetReference>
+        </connector>
+        <filters>
+            <field>Order_Number__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Order_Numer</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Canceled</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Order</object>
+    </recordUpdates>
+    <start>
+        <locationX>178</locationX>
+        <locationY>6</locationY>
+        <connector>
+            <targetReference>Cancel_Order</targetReference>
+        </connector>
+    </start>
+    <status>Obsolete</status>
+    <variables>
+        <name>Message</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>Order_Numer</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

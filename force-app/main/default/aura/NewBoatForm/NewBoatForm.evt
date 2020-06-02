@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="Event template">  
+    <aura:attribute name="boat" type="Boat__c"/>
+    <aura:attribute name="boatTypeId" type="BoatType__c"/>
+</aura:event>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Contact_must_be_in_Account_ZIP_Code</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( !ISBLANK( AccountId ) ,  MailingPostalCode   &lt;&gt;  Account.ShippingPostalCode )</errorConditionFormula>
+    <errorMessage>Contact records with no associated parent account can be added with any MailingPostalCode value</errorMessage>
+</ValidationRule>

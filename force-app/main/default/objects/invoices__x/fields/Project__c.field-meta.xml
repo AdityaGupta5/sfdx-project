@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Project__c</fullName>
+    <externalId>false</externalId>
+    <isFilteringDisabled>false</isFilteringDisabled>
+    <isNameField>false</isNameField>
+    <isSortingDisabled>false</isSortingDisabled>
+    <label>Project</label>
+    <length>255</length>
+    <referenceTargetField>Project__c.ProjectRef__c</referenceTargetField>
+    <referenceTo>Project__c</referenceTo>
+    <relationshipLabel>invoices</relationshipLabel>
+    <relationshipName>invoices</relationshipName>
+    <type>IndirectLookup</type>
+</CustomField>

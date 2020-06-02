@@ -1,0 +1,30 @@
+<aura:component controller="BoatSearchFormController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    
+    <aura:registerEvent name="formsubmit" type="c:FormSubmit"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="boatTypes" type="BoatType__c[]"/>
+    <aura:attribute name="selectedBoatType" type="String"/>
+    <!--<aura:handler name="formsubmit" event="c:FormSubmit" action="{!c.onFormSubmit}"/>-->
+    <aura:attribute name="renderNewButton" type="Boolean"/>
+    
+    <lightning:layout horizontalAlign="center" verticalAlign="center">
+        <lightning:layoutItem padding="horizontal-medium">
+            <lightning:select aura:id="boatTypes" label="" name="selectType" onchange="{!c.onSelectChange}">
+                <option value="">All Types</option>  
+                <aura:iteration items="{!v.boatTypes}" var="boatType">
+                    <option value="{!boatType.Id}">{!boatType.Name}</option>    
+                </aura:iteration>
+            </lightning:select>    
+        </lightning:layoutItem>
+        
+        <lightning:layoutItem>
+            <div class="slds-button-group" role="group">
+                <lightning:button class="slds-button" variant="brand" label="Search" onclick="{!c.onFormSubmit}"/>
+                <!--<aura:if isTrue="{!v.renderNewButton}">-->
+                	<lightning:button class="slds-button" variant="neutral" label="New" onclick="{!c.newBoat}"/>
+                <!--</aura:if>-->
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+</aura:component>

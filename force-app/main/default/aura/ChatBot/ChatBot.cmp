@@ -1,0 +1,4 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<!--<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>-->
+    <iframe src="{!'https://akg005-superbadge-dev-ed--c.ap4.visual.force.com/apex/ChatBotPage'}" width="100%" height="550px;" frameBorder="0"/>
+</aura:component>

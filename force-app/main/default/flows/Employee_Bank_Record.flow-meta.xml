@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Add_Employee_Record</name>
+        <label>Add Employee Record</label>
+        <locationX>519</locationX>
+        <locationY>61</locationY>
+        <actionName>BankService.addAccount</actionName>
+        <actionType>externalService</actionType>
+        <connector>
+            <targetReference>Assign_Account_Type</targetReference>
+        </connector>
+        <inputParameters>
+            <name>accountName</name>
+            <value>
+                <elementReference>Name_on_Account</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>accountType</name>
+            <value>
+                <elementReference>Account_Type</elementReference>
+            </value>
+        </inputParameters>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <assignments>
+        <name>Assign_Account_Type</name>
+        <label>Assign Account Type</label>
+        <locationX>745</locationX>
+        <locationY>64</locationY>
+        <assignmentItems>
+            <assignToReference>accountTypeField.Account_Type__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Add_Employee_Record.201.z0type</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <interviewLabel>Employee Bank Record {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Employee Bank Record</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <screens>
+        <name>Account_Information</name>
+        <label>Account Information</label>
+        <locationX>304</locationX>
+        <locationY>59</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Add_Employee_Record</targetReference>
+        </connector>
+        <fields>
+            <name>Name_on_Account</name>
+            <dataType>String</dataType>
+            <fieldText>Name on Account</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>Account_Type</name>
+            <dataType>String</dataType>
+            <fieldText>Account Type</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Account_Information</targetReference>
+        </connector>
+    </start>
+    <status>Draft</status>
+    <variables>
+        <name>accountTypeField</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <objectType>User</objectType>
+    </variables>
+</Flow>

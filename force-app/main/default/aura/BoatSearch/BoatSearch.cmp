@@ -1,0 +1,15 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <aura:handler name="formsubmit" event="c:FormSubmit" action="{!c.onFormSubmit}" phase="capture"/>
+    <aura:attribute name="boatTypeId" type="String"/>
+    <lightning:layout> 
+        <lightning:card title="Find a Boat" class="slds-m-top_10px" >
+            <c:BoatSearchForm/>
+        </lightning:card>
+    </lightning:layout>
+    
+    <lightning:layout > 
+        <lightning:card title="Matching Boats" class="slds-m-top_10px" >
+            <c:BoatSearchResults aura:id="boatSearchResult"/>
+        </lightning:card>
+    </lightning:layout>
+</aura:component>

@@ -1,0 +1,17 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<aura:attribute name="number" type="Integer" default="5"/>
+    <aura:attribute name="html" type="String"/>
+
+    <div class="slds-p-left_large">
+    	<h2 class="slds-text-heading_large">Chuck Norris Jokes Generator</h2>
+        
+        <lightning:input type="number" aura:id="number" label="Enter a number"
+                         class="slds-m-around_small slds-size_1-of-8"/>
+        
+        <lightning:button variant="brand" label="Get Jokes" class="slds-m-around_medium"
+                          onclick="{!c.handleClick }"/>
+        
+        <aura:unescapedHtml value="{!v.html}"/>
+        
+    </div>
+</aura:component>

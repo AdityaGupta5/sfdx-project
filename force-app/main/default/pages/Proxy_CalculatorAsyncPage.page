@@ -1,0 +1,26 @@
+<apex:page controller="Proxy_CalculatorAsyncController" cache="false" showChat="false" showHeader="false">
+    <apex:form >
+    	<apex:actionFunction action="{!invoke}" name="invoke"/>
+        <apex:outputPanel id="input">
+            <apex:inputText value="{!methodName}"  id="methodName" />
+            <apex:inputText value="{!params}" id="params" />
+            <apex:inputText value="{!uniqueId}" id="uniqueId" />
+        </apex:outputPanel>
+    </apex:form>
+    
+    <script>
+    	console.log("Event registered");
+    	window.addEventListener("message", function (event) {
+            debugger;
+            var methodName = event.data.methodName;
+            var params = event.data.methodParams;
+            var uniqueId =  event.data.uniqueId;
+            console.log("Message received (Id:" + uniqueId +
+                    ", methodName:" + methodName + ")");
+            document.getElementById("{!$Component.main.methodName}").value = methodName;
+            document.getElementById("{!$Component.main.uniqueId}").value = uniqueId;
+            document.getElementById("{!$Component.main.params}").value = params;
+            invoke();
+        }, false);
+    </script>
+</apex:page>

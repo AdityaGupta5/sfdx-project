@@ -1,0 +1,46 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+    <aura:handler event="c:Calculator_CallBackWSAsyncEvent" action="{!c.callback}"/>
+    <aura:registerEvent name="Calculator_CallWSAsyncEvent" type="c:Calculator_CallWSAsyncEvent"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="number1" type="Integer"/>
+    <aura:attribute name="number2" type="Integer"/>
+    <aura:attribute name="total" type="Integer"/>
+    
+    <aura:attribute name="isAdd" type="boolean" default="false" />
+    <aura:attribute name="isSub" type="boolean" default="false" />
+    <aura:attribute name="isMul" type="boolean" default="false" />
+    <aura:attribute name="isDiv" type="boolean" default="false" />
+    
+    <aura:attribute name="UniqueId" type="string"/>
+    
+    <div> 
+        <lightning:input aura:id="num1" value="{!v.number1}" placeholder="enter your digit..." label="Number 1" />
+        <lightning:input aura:id="num2" value="{!v.number2}" placeholder="enter your digit..." label="Number 2" />
+    </div>
+    
+    <div>
+        <aura:if isTrue="{!v.isAdd}">
+            Addition of Two Numbers = {!v.total}
+        </aura:if>
+        <aura:if isTrue="{!v.isSub}">
+            Subtraction of Two Numbers = {!v.total}
+        </aura:if>
+        <aura:if isTrue="{!v.isMul}">
+            Multiplication of Two Numbers = {!v.total}
+        </aura:if>    
+        <aura:if isTrue="{!v.isDiv}">
+            Division of Two Numbers = {!v.total}
+        </aura:if>    
+    </div>
+    
+    <lightning:buttonGroup>
+    	<lightning:button aura:id="add" type="submit" label="Addition" class="slds-m-top_medium" onclick="{! c.doAddition}"/> 
+        <lightning:button aura:id="sub" type="submit" label="Subtraction" class="slds-m-top_medium" onclick="{! c.doSubtraction}"/>
+        <lightning:button aura:id="mul" type="submit" label="Multiply" class="slds-m-top_medium" onclick="{! c.doMultipy}"/>
+        <lightning:button aura:id="div" type="submit" label="Division" class="slds-m-top_medium" onclick="{! c.doDivide}"/>
+    </lightning:buttonGroup>
+    
+</aura:component>

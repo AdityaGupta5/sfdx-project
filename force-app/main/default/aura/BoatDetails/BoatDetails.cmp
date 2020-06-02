@@ -1,0 +1,44 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    
+    <!--<aura:attribute access="private" name="selectedTabId" type="String"/>-->
+    
+    <aura:attribute name="boat" type="Boat__c" access="public"/>
+    <aura:attribute name="id" type="Id" access="public"/>
+    
+    <aura:handler name="boatSelected" event="c:BoatSelected" action="{!c.onBoatSelected}"/>
+    <aura:handler name="BoatReviewAdded" event="c:BoatReviewAdded" action="{!c.onBoatReviewAdded}"/>
+    
+    <force:recordData aura:id="service"
+                      recordId="{!v.id}"
+            		  mode="VIEW"
+                      fields="Id,
+                              Name,
+                              Description__c,
+                              Price__c,
+                              Length__c,
+                              Contact__r.Name,
+                              Contact__r.Email,
+                              Contact__r.HomePhone,
+                              BoatType__r.Name,
+                              Picture__c"
+                      targetFields="{!v.boat}"
+                      recordUpdated="{!c.onRecordUpdated}"/>
+    
+    <!--<aura:if isTrue="{!(v.boat != 'undefined')}"> -->
+    <aura:if isTrue="{!not(empty(v.boat))}">    
+        <div class="slds-card">
+            <lightning:tabset aura:id="details">
+                <lightning:tab id="boatdetailstab" aura:id="boatDetailsTab" label="Details">
+                    <c:BoatDetail boat="{!v.boat}"/>    
+                </lightning:tab>
+                <lightning:tab id="boatreviewtab" aura:id="boatReviewsTab" label="Reviews">
+                	<c:BoatReviews aura:id="boatReviews" boat="{!v.boat}"/>    
+                </lightning:tab>
+                <lightning:tab id="boataddreviewtab" aura:id="boatAddReviewTab" label="Add Review">
+                    <c:AddBoatReview boat="{!v.boat}"/>    
+                </lightning:tab>
+                
+            </lightning:tabset>
+        </div>
+    </aura:if>
+</aura:component>

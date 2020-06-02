@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION" access="global"  description="Event template">
+    <aura:attribute name="result" type="Object"/> 
+    <aura:attribute name="methodName" type="String"/>  
+    <aura:attribute name="UniqueId" type="String"/>
+</aura:event>

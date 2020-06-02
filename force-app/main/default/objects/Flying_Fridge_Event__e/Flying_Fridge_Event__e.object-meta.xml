@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>InDevelopment</deploymentStatus>
+    <description>Flying Fridge events received from commercial refrigerators</description>
+    <eventType>StandardVolume</eventType>
+    <label>Flying Fridge Event</label>
+    <pluralLabel>Flying Fridge Events</pluralLabel>
+    <publishBehavior>PublishImmediately</publishBehavior>
+</CustomObject>

@@ -1,0 +1,14 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+    <aura:attribute name="vfBaseURL" type="String" />
+    <aura:attribute name="result" type="String" />
+    <aura:attribute name="srcIFrame" type="String" />
+    <aura:attribute name="method" type="String" />
+    <aura:registerEvent name="Calculator_CallBackWSAsyncEvent" type="c:Calculator_CallBackWSAsyncEvent"/>
+    <aura:handler event="c:Calculator_CallWSAsyncEvent" action="{!c.callCalculatorWSAsync}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <iframe aura:id="vfFrame" src="{!v.srcIFrame}" frameborder="0" width="1" height="1" ></iframe>
+    
+    <!--<lightning:container aura:id="vfFrame" src="{!v.srcIFrame}"></lightning:container>-->
+</aura:component>
