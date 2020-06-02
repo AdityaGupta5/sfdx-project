@@ -1,3 +1,4 @@
+// Class for Adding Constants
 public class Constants {
     public static final Integer DEFAULT_ROWS = 5;
     public static final String SELECT_ONE = Label.Select_One;
